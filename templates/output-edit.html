@@ -1,0 +1,73 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+{% extends 'base.html' %}
+{% load static %}
+		{% block content %}
+			<main class="content">
+				<div class="col-12 col-xl-12">
+					<div class="card">
+						<div class="col-12 col-xl-12">
+							<div class="card">
+								<div class="card-body">
+									<div class="card-body">
+										<form enctype="multipart/form-data" method="post">
+											{% csrf_token %}
+											<div class="form-group row">
+											    <label class="col-form-label col-sm-2 text-sm-right">Narx</label>
+                                                <div class="col-sm-10">
+                                                    <input required class="form-control" value="{{form.price.value}}" type="number" name="price" maxlength="255"  id="id_name">
+                                                </div>
+										    </div>
+
+										    <div class="form-group row">
+											    <label class="col-form-label col-sm-2 text-sm-right">Narx Haqida</label>
+											    <div class="col-sm-10">
+												    <input required value="{{form.about_the_price.value}}" name='about_the_price' type="text" class="form-control" rows="3">
+											    </div>
+										    </div>
+
+
+                                            <div>
+                                                <div style='display: flex; justify-content: space-between;'>
+										            <div class="modal-footer">
+                                                        <button type="Submit" class="btn btn-success">SAQLASH </button>
+                                                        <button type="Submit" name='adding' value='001' class="btn btn-success">SAQLASH VA BOSHQA QO‘SHISH</button>
+                                                        <button type="Submit" name='editing' value='002' class="btn btn-success">SAQLASH VA TAHRIRLASHNI DAVOM ETING</button>
+													</div>
+													<div class="card">
+													<div class="card-header">
+														<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#defaultModalDanger">
+															Delete
+														</button>
+														<div class="modal fade" id="defaultModalDanger" tabindex="-1" role="dialog" aria-hidden="true">
+															<div class="modal-dialog" role="document">
+																<div class="modal-content">
+																	<div class="modal-header">
+																		<h5 class="modal-title">O'zgartirish</h5>
+																		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																			<span aria-hidden="true">&times;</span>
+																		</button>
+																	</div>
+																	<div class="modal-body m-3">
+																		<p class="mb-0">Haqiqatan ham o'chirmoqchimisiz?</p>
+																	</div>
+																	<div class="modal-footer">
+																		<button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
+																		<a href="{% url 'delete_output' pk %}" style="color: white" type="button" class="btn btn-danger">DELETE</a>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!-- END danger modal -->
+													</div>
+									            </div>
+                                            </div>
+									    </form>
+                                    </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</main>
+		{% endblock content %}

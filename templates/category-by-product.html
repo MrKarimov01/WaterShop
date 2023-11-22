@@ -1,0 +1,112 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+			<main class="content">
+				<div class="container-fluid p-0">
+					<div class="row">
+						<div class="col-12 col-xl-12">
+							<div class="card">
+								<div class="card">
+                                    <div style="display:flex">
+                                        <div style="width:45%" class="card-header">
+											<h5 class="card-title">Mahsulotlar Ro'yxati</h5>
+											<h6 class="card-subtitle text-muted">Ushbu sahifada siz mahsulot ro'yxatini ko'rasiz va siz xohlagan mahsulotni o'zgartirishingiz yoki yangi mahsulot yaratishingiz mumkin</h6>
+
+                            			</div>
+										
+										<div style="display:flex;flex-direction: column;align-items: center;justify-content: center;width:100%;align-items: flex-end;">
+                               				 <a style="margin-right:3%" class="btn btn-primary" href="{% url 'create-product' dir %}" role="button">Yaratish</a>
+										</div>
+                        			</div>
+								</div>
+								<div class="card-body">
+									<table id="datatables-basic" class="table table-striped" style="width:100%">
+										<thead>
+											<tr>
+												<th>Bo`lim</th>
+												<th>Rasm</th>
+												<th>Nomi</th>
+												<th>Liter</th>
+												<th>Narxi</th>
+												<th>Kuni</th>
+												<th>Vaqti</th>
+											</tr>
+										</thead>
+										<tbody>
+										{% for product in products %}
+											<tr>
+												<td><a href="{% url 'product-edit' product.id %}"><strong><em>{{ product.category.name}}</em></strong></a></td>
+												<td><img width="80px" src="{{ product.photo.url }}" alt=""></td>
+												<td><a href="{% url 'product-edit' product.id %}"><strong><em>{{ product.name }}</em></strong></a></td>
+												<td><a href="{% url 'product-edit' product.id %}"><strong><em>{{ product.get_liter_display }}</em></strong></a></td>
+												<td><a href="{% url 'product-edit' product.id %}"><strong><em>{{ product.price }} so`m</em></strong></a></td>
+												<td><a href="{% url 'product-edit' product.id %}"><strong><em>{{ product.date }}</em></strong></a></td>
+												<td><a href="{% url 'product-edit' product.id %}"><strong><em>{{ product.time }}</em></strong></a></td>
+											</tr>
+										{% endfor %}
+										</tbody>
+									</table>
+									  	{% if products.paginator.num_pages > 1 %}
+										  	<div class="card-footer d-flex justify-content-end">
+											  	<nav aria-label="Page navigation">
+												  	<ul class="pagination">
+														  {% if products.has_previous %}
+															  <li class="page-item">
+																<a class="page-link " href="?page={{ products.previous_page_number }}">
+																	Previous
+																</a>
+															  </li>
+														  {% endif %}
+														  {% for num in products.paginator.page_range %}
+														  {% if num == products.number %}
+															<li class="page-item active">
+																<a class="page-link" href="#" tabindex="-1">{{ num }}</a>
+															</li>
+														  {% elif num > products.number|add:'-2' and num < products.number|add:'2' %}
+														   <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+														  {% endif %}
+														  {% endfor %}
+														  {% if product.has_next %}
+														  <li class="page-item">
+																<a class="page-link " href="?page={{ products.next_page_number }}">
+																	Next
+																</a>
+														  </li>
+														  {% endif %}
+												  	</ul>
+											  	</nav>
+										  	</div>
+									  	{% endif %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</main>
+
+
+{% endblock content %}
+{% block js %}
+	 <script>
+			$(function() {
+				// Datatables basic
+				$("#datatables-basic").DataTable({
+					responsive: true
+				});
+				// Datatables with Buttons
+				var datatablesButtons = $("#datatables-buttons").DataTable({
+					responsive: true,
+					lengthChange: !1,
+					buttons: ["copy", "print"]
+				});
+				datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)");
+				// Datatables with Multiselect
+				var datatablesMulti = $("#datatables-multi").DataTable({
+					responsive: true,
+					select: {
+						style: "multi"
+					}
+				});
+			});
+		</script>
+{% endblock js %}

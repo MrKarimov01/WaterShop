@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+			<main class="content">
+				<div class="container-fluid p-0">
+					<div class="row">
+						<div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
+							<div class="card">
+								<div class="card">
+                                    <div style="display:flex">
+                                        <div style="width:45%" class="card-header">
+											<h5 class="card-title">Product List</h5>
+											<h6 class="card-subtitle text-muted">On this page you will see the list of product and you can change the product you want or create a new product</h6>
+
+                            			</div>
+
+										<div style="display:flex;flex-direction: column;align-items: center;justify-content: center;width:100%;align-items: flex-end;">
+                               				 <a style="margin-right:3%" class="btn btn-primary" href="{% url 'order-create' dir %}" role="button">Create</a>
+										</div>
+                        			</div>
+								</div>
+								<div class="card-body">
+									<table id="datatables-basic" class="table table-striped" style="width:100%">
+										<thead>
+											<tr>
+											    <th>product1</th>
+												<th>quantity1</th>
+												<th>total1</th>
+												<th>product2</th>
+												<th>quantity2</th>
+												<th>total2</th>
+												<th>product3</th>
+												<th>quantity3</th>
+												<th>total3</th>
+												<th>product4</th>
+												<th>quantity4</th>
+												<th>total4</th>
+												<th>date</th>
+												<th>time</th>
+											</tr>
+										</thead>
+										<tbody>
+										{% for oder in order %}
+												<tr>
+													<td><a class="link-primary" link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover href="{% url 'order_edit' order.id %}"><strong><em>{{ oder.product1|slice:":16" }} so`m</em></strong></a></td>
+													<td><a class="link-primary" link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover href="{% url 'order_edit' order.id %}"><strong><em>{{ oder.quantity1|slice:":16" }}</em></strong></a></td>
+													<td><a class="link-primary" link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover href="{% url 'order_edit' order.id %}"><strong><em>{{ oder.total1 }}</em></strong></a></td>
+													<td><a class="link-primary" link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover href="{% url 'order_edit' order.id %}"><strong><em>{{ oder.product2 }}</em></strong></a></td>
+													<td><a class="link-primary" link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover href="{% url 'order_edit' order.id %}"><strong><em>{{ oder.quantity2 }}</em></strong></a></td>
+													<td><a class="link-primary" link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover href="{% url 'order_edit' order.id %}"><strong><em>{{ oder.total2 }}</em></strong></a></td>
+													<td><a class="link-primary" link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover href="{% url 'order_edit' order.id %}"><strong><em>{{ oder.product3 }}</em></strong></a></td>
+													<td><a class="link-primary" link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover href="{% url 'order_edit' order.id %}"><strong><em>{{ oder.quantity3 }}</em></strong></a></td>
+													<td><a class="link-primary" link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover href="{% url 'order_edit' order.id %}"><strong><em>{{ oder.total3 }}</em></strong></a></td>
+													<td><a class="link-primary" link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover href="{% url 'order_edit' order.id %}"><strong><em>{{ oder.product4 }}</em></strong></a></td>
+													<td><a class="link-primary" link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover href="{% url 'order_edit' order.id %}"><strong><em>{{ oder.quantity4 }}</em></strong></a></td>
+													<td><a class="link-primary" link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover href="{% url 'order_edit' order.id %}"><strong><em>{{ oder.total4 }}</em></strong></a></td>
+													<td><a class="link-primary" link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover href="{% url 'order_edit' order.id %}"><strong><em>{{ oder.date }}</em></strong></a></td>
+													<td><a class="link-primary" link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover href="{% url 'order_edit' order.id %}"><strong><em>{{ oder.time }}</em></strong></a></td>
+												</tr>
+											{% endfor %}
+										</tbody>
+									</table>
+									  	{% if products.paginator.num_pages > 1 %}
+										  	<div class="card-footer d-flex justify-content-end">
+											  	<nav aria-label="Page navigation">
+												  	<ul class="pagination">
+														  {% if products.has_previous %}
+															  <li class="page-item">
+																<a class="page-link " href="?page={{ products.previous_page_number }}">
+																	Previous
+																</a>
+															  </li>
+														  {% endif %}
+														  {% for num in products.paginator.page_range %}
+														  {% if num == products.number %}
+															<li class="page-item active">
+																<a class="page-link" href="#" tabindex="-1">{{ num }}</a>
+															</li>
+														  {% elif num > products.number|add:'-2' and num < products.number|add:'2' %}
+														   <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+														  {% endif %}
+														  {% endfor %}
+														  {% if product.has_next %}
+														  <li class="page-item">
+																<a class="page-link " href="?page={{ products.next_page_number }}">
+																	Next
+																</a>
+														  </li>
+														  {% endif %}
+												  	</ul>
+											  	</nav>
+										  	</div>
+									  	{% endif %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</main>
+
+
+{% endblock content %}
+{% block js %}
+	 <script>
+			$(function() {
+				// Datatables basic
+				$("#datatables-basic").DataTable({
+					responsive: true
+				});
+				// Datatables with Buttons
+				var datatablesButtons = $("#datatables-buttons").DataTable({
+					responsive: true,
+					lengthChange: !1,
+					buttons: ["copy", "print"]
+				});
+				datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)");
+				// Datatables with Multiselect
+				var datatablesMulti = $("#datatables-multi").DataTable({
+					responsive: true,
+					select: {
+						style: "multi"
+					}
+				});
+			});
+		</script>
+{% endblock js %}

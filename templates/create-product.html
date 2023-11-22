@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+			<main class="content">
+				<div class="container-fluid p-0">
+					<div class="row">
+						<div class="col-12 col-xl-12">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title">Mahsulot Yaratish </h5>
+								</div>
+								<div class="card-body">
+									<form  method="post" enctype="multipart/form-data" >
+										{% csrf_token %}
+										{{ form.media }}
+										{{ form.as_p }}
+
+										<div>
+											<button type="Submit" class="btn btn-success">SAQLASH</button>
+											<button type="Submit" name='adding' value='001' class="btn btn-success">SAQLASH VA BOSHQA QO‘SHISH</button>
+											<button type="Submit" name='editing' value='002' class="btn btn-success">SAQLASH VA TAHRIRLASHNI DAVOM ETING</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</main>
+
+
+{% endblock content %}
+{% block js %}
+<script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+{% endblock js %}

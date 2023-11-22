@@ -1,0 +1,168 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Responsive Bootstrap 4 Admin &amp; Dashboard Template">
+	<meta name="author" content="Bootlab">
+
+	<title>WaterShop - Admin &amp; Dashboard Panel</title>
+
+	<link rel="preconnect" href="//fonts.gstatic.com/" crossorigin="">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+	<!-- PICK ONE OF THE STYLES BELOW -->
+	 <link href="{% static 'css/classic.css' %}" rel="stylesheet">
+<!--	 <link href="{% static 'css/corporate.css' %}" rel="stylesheet">-->
+	<!-- <link href="css/modern.css" rel="stylesheet"> -->
+	<!-- BEGIN SETTINGS -->
+	<!-- You can remove this after picking a style -->
+
+	<style>
+		body {
+			opacity: 0;
+		}
+		footer {
+				padding: 10px; /* Yopiq chegarani o'lchamini belgilash */
+				position: fixed; /* Pastga yopishni belgilash */
+				bottom: 0; /* Pastga to'g'rilash */
+				width: 100%; /* To'la sahifa bo'yi bo'ylab olinishi */
+		}
+	</style>
+	<script src="js\settings.js"></script>
+	<!-- END SETTINGS -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-120946860-6');
+</script></head>
+
+<body >
+	<div class="wrapper">
+		<nav id="sidebar" class="sidebar">
+			<div class="sidebar-content ">
+				<a class="sidebar-brand" href="{% url 'index' %}">
+					  <i class="align-middle" data-feather="cpu"></i>
+					  <span class="align-middle">ZAMZAM DO`KONI</span>
+        		</a>
+
+				<ul  class="sidebar-nav">
+					<li class="sidebar-header">
+						Asosiy
+					</li>
+					<li class="sidebar-item">
+						<a href="#dashboards" data-toggle="collapse" class="sidebar-link">
+             				 <i class="align-middle" data-feather="home"></i><span class="align-middle">Boshqaruv paneli</span>
+            			</a>
+						<ul id="dashboards" class="sidebar-dropdown list-unstyled collapse show" data-parent="#sidebar">
+							<li class="sidebar-item"><a class="sidebar-link" href="{% url 'category' %}">Bo`lim Yaratish</a></li>
+						</ul>
+
+						<ul id="dashboards" class="sidebar-dropdown list-unstyled collapse show" data-parent="#sidebar">
+							<li class="sidebar-item"><a class="sidebar-link" href="{% url 'select-category' %}">Bo`limlar Sahifasi</a></li>
+						</ul>
+
+						<ul id="dashboards" class="sidebar-dropdown list-unstyled collapse show" data-parent="#sidebar">
+							<li class="sidebar-item"><a class="sidebar-link" href="{% url 'category-page' %}">Bo`limlar Ro`yxati</a></li>
+						</ul>
+
+						<a href="#dashboard" data-toggle="collapse" class="sidebar-link">
+             				 <i class="align-middle" data-feather="home"></i><span class="align-middle">Boshqaruv paneli</span>
+            			</a>
+
+						<ul id="dashboard" class="sidebar-dropdown list-unstyled collapse show" data-parent="#sidebar">
+							<li class="sidebar-item"><a class="sidebar-link" href="{% url 'output-page' %}">Kirim Chiqimlar Sahifasi</a></li>
+						</ul>
+
+						<ul id="dashboard" class="sidebar-dropdown list-unstyled collapse show" data-parent="#sidebar">
+							<li class="sidebar-item"><a class="sidebar-link" href="{% url 'order-page' %}">Buyurtmalar Sahifasi</a></li>
+						</ul>
+
+						<ul id="dashboard" class="sidebar-dropdown list-unstyled collapse show" data-parent="#sidebar">
+							<li class="sidebar-item"><a class="sidebar-link" href="{% url 'help' %}">Yordam </a></li>
+						</ul>
+
+
+					</li>
+				</ul>
+
+				<div class="sidebar-bottom d-none d-lg-block">
+					<div class="media">
+						<div class="media-body">
+							<div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		<div class="main">
+			<nav class="navbar navbar-expand navbar-light bg-white">
+				<a class="sidebar-toggle d-flex mr-2">
+                   <i class="hamburger align-self-center"></i>
+        		</a>
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item dropdown">
+							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-toggle="dropdown">
+                				<i class="align-middle" data-feather="settings"></i>
+              				</a>
+
+							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-toggle="dropdown">
+                				<img src="{% static 'img\photos\salom-2.png' %}" class="avatar img-fluid rounded-circle mr-1" alt=""> <span class="text-dark">Admin</span>
+              				</a>
+							<div class="dropdown-menu dropdown-menu-right">
+								<a class="dropdown-item" href="{% url 'logout' %}">Tizimdan Chiqish</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+
+    {% block content %}
+    {% endblock content %}
+
+            <footer class="footer">
+				<div class="container-fluid">
+					<div class="row text-muted">
+						<div class="col-6 text-left">
+							<ul class="list-inline">
+								<li class="list-inline-item">
+									<a class="text-muted" href="#">Support</a>
+								</li>
+								<li class="list-inline-item">
+									<a class="text-muted" href="#">Help Center</a>
+								</li>
+								<li class="list-inline-item">
+									<a class="text-muted" href="#">Privacy</a>
+								</li>
+								<li class="list-inline-item">
+									<a class="text-muted" href="#">Terms of Service</a>
+								</li>
+							</ul>
+
+						</div>
+						<div class="col-6 text-right">
+							<p class="mb-0">
+								&copy; 2023 - <a href="{% url 'index' %}" class="text-muted">ZAMZAM Do`koni</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+	<script src="{% static 'js\app.js' %}"></script>
+    {% block js %}
+    {% endblock js %}
+</body>
+
+</html>
